@@ -16,7 +16,8 @@ public class Store : MonoBehaviour
     /// </summary>
     private float currentBalance;
 
-    public Text CurrentBalanceText;
+
+    public Text currentBalanceText;
 
     /// <summary>
     /// The store cost.
@@ -33,6 +34,20 @@ public class Store : MonoBehaviour
     /// </summary>
     public Text storeCountText;
 
+    private float baseStoreProfit;
+
+    /// <summary>
+    /// The timer.
+    /// </summary>
+    private float storeTimer = 4f;
+
+    /// <summary>
+    /// The current timer.
+    /// </summary>
+    private float currentTimer = 0;
+
+    private bool startTimer;
+
     /// <summary>
     /// The buy store on click.
     /// </summary>
@@ -48,10 +63,21 @@ public class Store : MonoBehaviour
             this.storeCount += 1;
             this.storeCountText.text = this.storeCount.ToString();
             this.currentBalance -= this.baseStoreCost;
-            this.CurrentBalanceText.text = this.currentBalance.ToString("C2");
+            this.currentBalanceText.text = this.currentBalance.ToString("C2");
         }
 
+    }
 
+    /// <summary>
+    /// The store on click.
+    /// </summary>
+    public void StoreOnClick()
+    {
+        if (!this.startTimer)
+        {
+            Debug.Log("Start timer");
+            this.startTimer = true;
+        }
 
     }
 
@@ -64,16 +90,31 @@ public class Store : MonoBehaviour
         this.storeCount = 1;
         this.currentBalance = 0f;
         this.baseStoreCost = 1f;
+        this.baseStoreProfit = 1f;
         this.storeCountText.text = this.storeCount.ToString();
-        this.CurrentBalanceText.text = this.currentBalance.ToString("C2");
+        this.currentBalanceText.text = this.currentBalance.ToString("C2");
+        this.startTimer = false;
     }
 
     /// <summary>
     /// The update.
     /// Update is called once per frame
     /// </summary>
-    private void Update () {
-		
+    private void Update()
+    {
+        if (this.startTimer)
+        {
+            this.currentTimer += Time.deltaTime;
+
+            if (this.currentTimer > this.storeTimer)
+            {
+                Debug.Log("End of Timer");
+                this.startTimer = false;
+                this.currentTimer = 0;
+                this.currentBalance += this.baseStoreProfit * this.storeCount;
+                this.currentBalanceText.text = this.currentBalance.ToString("C2");
+            }
+        }
 	}
 
 
