@@ -12,6 +12,18 @@ using UnityEngine.UI;
 public class Store : MonoBehaviour
 {
     /// <summary>
+    /// The current balance.
+    /// </summary>
+    private float currentBalance;
+
+    public Text CurrentBalanceText;
+
+    /// <summary>
+    /// The store cost.
+    /// </summary>
+    private float baseStoreCost;
+
+    /// <summary>
     /// The store count.
     /// </summary>
     private int storeCount;
@@ -26,10 +38,21 @@ public class Store : MonoBehaviour
     /// </summary>
     public void BuyStoreOnClick()
     {
-        this.storeCount += 1;
-        this.storeCountText.text = this.storeCount.ToString();
 
-        // Debug.Log(this.storeCount);
+        if (this.baseStoreCost > this.currentBalance)
+        {
+            return;
+        }
+        else
+        {
+            this.storeCount += 1;
+            this.storeCountText.text = this.storeCount.ToString();
+            this.currentBalance -= this.baseStoreCost;
+            this.CurrentBalanceText.text = this.currentBalance.ToString("C2");
+        }
+
+
+
     }
 
     /// <summary>
@@ -39,6 +62,10 @@ public class Store : MonoBehaviour
     private void Start ()
     {
         this.storeCount = 1;
+        this.currentBalance = 0f;
+        this.baseStoreCost = 1f;
+        this.storeCountText.text = this.storeCount.ToString();
+        this.CurrentBalanceText.text = this.currentBalance.ToString("C2");
     }
 
     /// <summary>
