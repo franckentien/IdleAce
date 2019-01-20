@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 /// <summary>
 /// The store.
@@ -15,12 +17,19 @@ public class Store : MonoBehaviour
     private int storeCount;
 
     /// <summary>
+    /// The store count text.
+    /// </summary>
+    public Text storeCountText;
+
+    /// <summary>
     /// The buy store on click.
     /// </summary>
     public void BuyStoreOnClick()
     {
         this.storeCount += 1;
-        Debug.Log(this.storeCount);
+        this.storeCountText.text = this.storeCount.ToString();
+
+        // Debug.Log(this.storeCount);
     }
 
     /// <summary>
@@ -29,7 +38,7 @@ public class Store : MonoBehaviour
     /// </summary>
     private void Start ()
     {
-        this.storeCount = 0;
+        this.storeCount = 1;
     }
 
     /// <summary>
