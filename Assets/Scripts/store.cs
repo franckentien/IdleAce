@@ -13,34 +13,41 @@ public class Store : MonoBehaviour
 {
 
     /// <summary>
-    /// The progress slider.
-    /// </summary>
-    public Slider progressSlider;
-
-    /// <summary>
     /// The store cost.
     /// </summary>
-    private float baseStoreCost;
+    public float baseStoreCost;
+
+    /// <summary>
+    /// The base store profit.
+    /// </summary>
+    public float baseStoreProfit;
+
+    /// <summary>
+    /// The timer.
+    /// </summary>
+    public float storeTimer = 4f;
 
     /// <summary>
     /// The store count.
     /// </summary>
-    private int storeCount;
+    public int storeCount;
+
+    /// <summary>
+    /// The progress slider.
+    /// </summary>
+    public Slider progressSlider;
+
+
+
 
     /// <summary>
     /// The store count text.
     /// </summary>
     public Text storeCountText;
 
-    /// <summary>
-    /// The base store profit.
-    /// </summary>
-    private float baseStoreProfit;
 
-    /// <summary>
-    /// The timer.
-    /// </summary>
-    private float storeTimer = 4f;
+
+
 
     /// <summary>
     /// The current timer.
@@ -92,9 +99,6 @@ public class Store : MonoBehaviour
     /// </summary>
     private void Start ()
     {
-        this.storeCount = 1;
-        this.baseStoreCost = 1f;
-        this.baseStoreProfit = 1f;
         this.storeCountText.text = this.storeCount.ToString();
         this.startTimer = false;
     }
