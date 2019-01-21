@@ -16,8 +16,15 @@ public class Store : MonoBehaviour
     /// </summary>
     private float currentBalance;
 
-
+    /// <summary>
+    /// The current balance text.
+    /// </summary>
     public Text currentBalanceText;
+
+    /// <summary>
+    /// The progress slider.
+    /// </summary>
+    public Slider progressSlider;
 
     /// <summary>
     /// The store cost.
@@ -115,7 +122,9 @@ public class Store : MonoBehaviour
                 this.currentBalanceText.text = this.currentBalance.ToString("C2");
             }
         }
-	}
+
+        this.progressSlider.value = this.currentTimer / this.storeTimer;
+    }
 
 
 }
