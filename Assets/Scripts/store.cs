@@ -11,15 +11,6 @@ using UnityEngine.UI;
 /// </summary>
 public class Store : MonoBehaviour
 {
-    /// <summary>
-    /// The current balance.
-    /// </summary>
-    private float currentBalance;
-
-    /// <summary>
-    /// The current balance text.
-    /// </summary>
-    public Text currentBalanceText;
 
     /// <summary>
     /// The progress slider.
@@ -41,6 +32,9 @@ public class Store : MonoBehaviour
     /// </summary>
     public Text storeCountText;
 
+    /// <summary>
+    /// The base store profit.
+    /// </summary>
     private float baseStoreProfit;
 
     /// <summary>
@@ -53,26 +47,34 @@ public class Store : MonoBehaviour
     /// </summary>
     private float currentTimer = 0;
 
+    /// <summary>
+    /// The start timer.
+    /// </summary>
     private bool startTimer;
+
+    /// <summary>
+    /// The game n manager.
+    /// </summary>
+    public GameManager GameManager;
 
     /// <summary>
     /// The buy store on click.
     /// </summary>
     public void BuyStoreOnClick()
     {
+        this.storeCount += 1;
+        this.storeCountText.text = this.storeCount.ToString();
+        this.GameManager.AddToBalance(-this.baseStoreCost);
 
-        if (this.baseStoreCost > this.currentBalance)
-        {
-            return;
-        }
-        else
-        {
-            this.storeCount += 1;
-            this.storeCountText.text = this.storeCount.ToString();
-            this.currentBalance -= this.baseStoreCost;
-            this.currentBalanceText.text = this.currentBalance.ToString("C2");
-        }
 
+        // if (this.baseStoreCost > this.currentBalance)
+        // {
+        //     return;
+        // }
+        // else
+        // {
+        //
+        // }
     }
 
     /// <summary>
@@ -82,7 +84,6 @@ public class Store : MonoBehaviour
     {
         if (!this.startTimer)
         {
-            Debug.Log("Start timer");
             this.startTimer = true;
         }
 
@@ -95,11 +96,9 @@ public class Store : MonoBehaviour
     private void Start ()
     {
         this.storeCount = 1;
-        this.currentBalance = 0f;
         this.baseStoreCost = 1f;
         this.baseStoreProfit = 1f;
         this.storeCountText.text = this.storeCount.ToString();
-        this.currentBalanceText.text = this.currentBalance.ToString("C2");
         this.startTimer = false;
     }
 
@@ -115,11 +114,9 @@ public class Store : MonoBehaviour
 
             if (this.currentTimer > this.storeTimer)
             {
-                Debug.Log("End of Timer");
                 this.startTimer = false;
                 this.currentTimer = 0;
-                this.currentBalance += this.baseStoreProfit * this.storeCount;
-                this.currentBalanceText.text = this.currentBalance.ToString("C2");
+                this.GameManager.AddToBalance(this.baseStoreProfit * this.storeCount);
             }
         }
 
