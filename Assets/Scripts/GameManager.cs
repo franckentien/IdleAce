@@ -9,14 +9,14 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     /// <summary>
-    /// The current balance.
-    /// </summary>
-    private float currentBalance;
-
-    /// <summary>
     /// The current balance text.
     /// </summary>
     public Text currentBalanceText;
+
+    /// <summary>
+    /// The current balance.
+    /// </summary>
+    private float currentBalance;
 
 
     /// <summary>
@@ -47,5 +47,19 @@ public class GameManager : MonoBehaviour
     {
         this.currentBalance += amount;
         this.currentBalanceText.text = this.currentBalance.ToString("C2");
+    }
+
+    /// <summary>
+    /// The can buy.
+    /// </summary>
+    /// <param name="amountToSpend">
+    /// The amount To spend.
+    /// </param>
+    /// <returns>
+    /// The <see cref="bool"/>.
+    /// </returns>
+    public bool CanBuy(float amountToSpend)
+    {
+        return !(amountToSpend > this.currentBalance);
     }
 }

@@ -62,19 +62,16 @@ public class Store : MonoBehaviour
     /// </summary>
     public void BuyStoreOnClick()
     {
-        this.storeCount += 1;
-        this.storeCountText.text = this.storeCount.ToString();
-        this.GameManager.AddToBalance(-this.baseStoreCost);
-
-
-        // if (this.baseStoreCost > this.currentBalance)
-        // {
-        //     return;
-        // }
-        // else
-        // {
-        //
-        // }
+        if (!this.GameManager.CanBuy(this.baseStoreCost))
+        {
+            return;
+        }
+        else
+        {
+            this.storeCount += 1;
+            this.storeCountText.text = this.storeCount.ToString();
+            this.GameManager.AddToBalance(-this.baseStoreCost);
+        }
     }
 
     /// <summary>
